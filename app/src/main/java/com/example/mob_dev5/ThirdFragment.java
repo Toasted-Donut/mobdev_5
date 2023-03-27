@@ -69,6 +69,12 @@ public class ThirdFragment extends Fragment {
         SharedPreferences settings = getActivity().getSharedPreferences(getResources().getString(R.string.settings), Context.MODE_PRIVATE);
         binding.txt1.setText(settings.getString("txt1","default"));
         binding.txt2.setText(settings.getString("txt2","default"));
+        binding.editTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                binding.editTxt.getText().clear();
+            }
+        });
         binding.editTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -77,12 +83,12 @@ public class ThirdFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                settings.edit().putString("txt3",binding.editTxt.getText().toString()).apply();
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                settings.edit().putString("txt3",editable.toString()).apply();
             }
         });
         return binding.getRoot();
