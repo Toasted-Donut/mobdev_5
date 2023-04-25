@@ -30,7 +30,7 @@ public class FirstFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    FragmentFirstBinding binding;
     public FirstFragment() {
         // Required empty public constructor
     }
@@ -65,10 +65,9 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentFirstBinding binding = FragmentFirstBinding.inflate(inflater);
+        binding = FragmentFirstBinding.inflate(inflater);
         SharedPreferences settings = getActivity().getSharedPreferences(getResources().getString(R.string.settings), Context.MODE_PRIVATE);
-        binding.txt1.setText(settings.getString("txt2","default"));
-        binding.txt2.setText(settings.getString("txt3","default"));
+
         binding.editTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -94,4 +93,11 @@ public class FirstFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences settings = getActivity().getSharedPreferences(getResources().getString(R.string.settings), Context.MODE_PRIVATE);
+        binding.txt1.setText(settings.getString("txt2","default"));
+        binding.txt2.setText(settings.getString("txt3","default"));
+    }
 }

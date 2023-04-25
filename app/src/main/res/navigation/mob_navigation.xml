@@ -15,12 +15,24 @@
         android:name="com.example.mob_dev5.SecondFragment"
         android:label="Люблю"
         tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_nav_love_to_nav_lovers"
+            app:destination="@id/nav_lovers" />
     </fragment>
     <fragment
         android:id="@+id/nav_donuts"
         android:name="com.example.mob_dev5.ThirdFragment"
         android:label="Пончики"
         tools:layout="@layout/fragment_third">
+    </fragment>
+    <fragment
+        android:id="@+id/nav_lovers"
+        android:name="com.example.mob_dev5.ForthFragment"
+        tools:layout="@layout/fragment_forth">
+        <argument
+            android:name="txt"
+            app:argType="string"
+            android:defaultValue="sample" />
     </fragment>
 
 

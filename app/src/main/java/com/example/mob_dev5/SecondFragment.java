@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +31,7 @@ public class SecondFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    FragmentSecondBinding binding;
 
     public SecondFragment() {
         // Required empty public constructor
@@ -65,10 +67,9 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentSecondBinding binding = FragmentSecondBinding.inflate(inflater);
+        binding = FragmentSecondBinding.inflate(inflater);
         SharedPreferences settings = getActivity().getSharedPreferences(getResources().getString(R.string.settings), Context.MODE_PRIVATE);
-        binding.txt1.setText(settings.getString("txt1","default"));
-        binding.txt2.setText(settings.getString("txt3","default"));
+
         binding.editTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -91,6 +92,22 @@ public class SecondFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
             }
         });
+        binding.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("txt","I love DONUTS");
+                Navigation.findNavController(view).navigate(R.id.action_nav_love_to_nav_lovers, bundle);
+            }
+        });
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences settings = getActivity().getSharedPreferences(getResources().getString(R.string.settings), Context.MODE_PRIVATE);
+        binding.txt1.setText(settings.getString("txt1","default"));
+        binding.txt2.setText(settings.getString("txt3","default"));
     }
 }
