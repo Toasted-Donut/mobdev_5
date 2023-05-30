@@ -1,5 +1,6 @@
 package com.example.mob_dev5;
 
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -67,6 +68,7 @@ public class ForthFragment extends Fragment {
         // Inflate the layout for this fragment
         FragmentForthBinding binding = FragmentForthBinding.inflate(inflater);
         binding.txt.setText(getArguments().getString("txt"));
+        ((AnimatedVectorDrawable)binding.img.getDrawable()).start();
         return binding.getRoot();
     }
 }
